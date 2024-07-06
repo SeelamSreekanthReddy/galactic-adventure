@@ -11,6 +11,9 @@
         "name": {
           "type": "cds.String"
         },
+        "email": {
+          "type": "cds.String"
+        },
         "stardustCollection": {
           "type": "cds.Integer"
         },
@@ -119,6 +122,13 @@
     },
     "GalacticService.Spacefarer": {
       "kind": "entity",
+      "@Capabilities.InsertRestrictions.$Type": "Capabilities.InsertRestrictionsType",
+      "@Capabilities.InsertRestrictions.Insertable": true,
+      "@Capabilities.UpdateRestrictions.$Type": "Capabilities.UpdateRestrictionsType",
+      "@Capabilities.UpdateRestrictions.Updatable": true,
+      "@Capabilities.DeleteRestrictions.$Type": "Capabilities.DeleteRestrictionsType",
+      "@Capabilities.DeleteRestrictions.Deletable": true,
+      "@odata.draft.enabled": true,
       "@UI.FieldGroup#GeneratedGroup.$Type": "UI.FieldGroupType",
       "@UI.FieldGroup#GeneratedGroup.Data": [
         {
@@ -133,6 +143,13 @@
           "Label": "name",
           "Value": {
             "=": "name"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "email",
+          "Value": {
+            "=": "email"
           }
         },
         {
@@ -241,6 +258,9 @@
           "type": "cds.Integer"
         },
         "name": {
+          "type": "cds.String"
+        },
+        "email": {
           "type": "cds.String"
         },
         "stardustCollection": {

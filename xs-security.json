@@ -1,0 +1,44 @@
+{
+  "xsappname": "galactic-spacefarers",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.User",
+      "description": "Default scope for users"
+    },
+    {
+      "name": "$XSAPPNAME.PlanetXAccess",
+      "description": "Scope for users from Planet X"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "homePlanet",
+      "description": "The planet where the user comes from",
+      "valueType": "string"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "User",
+      "description": "Default role for users",
+      "scope-references": [
+        "$XSAPPNAME.User"
+      ]
+    },
+    {
+      "name": "PlanetXUser",
+      "description": "Role for users from Planet X",
+      "scopes": [
+        "$XSAPPNAME.PlanetXAccess"
+      ],
+      "attributes": [
+        {
+          "name": "homePlanet",
+          "value": "X"
+        }
+      ]
+    }
+  ]
+}

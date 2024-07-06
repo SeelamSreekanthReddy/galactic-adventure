@@ -12,6 +12,9 @@
       "db": {
         "kind": "sqlite",
         "model": "*"
+      },
+      "uaa": {
+        "kind": "xsuaa"
       }
     }
   },
@@ -20,12 +23,17 @@
   "license": "ISC",
   "dependencies": {
     "@sap/cds": "^7.9.3",
+    "@sap/xsenv": "^5.1.0",
+    "@sap/xssec": "^3",
+    "passport": "^0.7.0",
+    "passport-saml": "^3.2.4",
     "sqlite3": "^5.0.0"
   },
   "sapux": [
     "app/galactic"
   ],
   "devDependencies": {
+    "@sap/cds-dk": "^7",
     "@sap/ux-specification": "^1.120.13"
   }
 }
