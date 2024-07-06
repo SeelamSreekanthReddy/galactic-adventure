@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="GalacticService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="Spacefarer" EntityType="GalacticService.Spacefarer">
+          <NavigationPropertyBinding Path="department" Target="Departments"/>
+          <NavigationPropertyBinding Path="position" Target="Positions"/>
+        </EntitySet>
+        <EntitySet Name="Departments" EntityType="GalacticService.Departments">
+          <NavigationPropertyBinding Path="members" Target="Spacefarer"/>
+        </EntitySet>
+        <EntitySet Name="Positions" EntityType="GalacticService.Positions">
+          <NavigationPropertyBinding Path="members" Target="Spacefarer"/>
+        </EntitySet>
+      </EntityContainer>
+      <EntityType Name="Spacefarer">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="name" Type="Edm.String"/>
+        <Property Name="stardustCollection" Type="Edm.Int32"/>
+        <Property Name="wormholeNavigationSkill" Type="Edm.Int32"/>
+        <Property Name="originPlanet" Type="Edm.String"/>
+        <Property Name="spacesuitColor" Type="Edm.String"/>
+        <NavigationProperty Name="department" Type="GalacticService.Departments" Partner="members">
+          <ReferentialConstraint Property="department_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="department_ID" Type="Edm.Int32"/>
+        <NavigationProperty Name="position" Type="GalacticService.Positions" Partner="members">
+          <ReferentialConstraint Property="position_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="position_ID" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="Departments">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="name" Type="Edm.String"/>
+        <NavigationProperty Name="members" Type="Collection(GalacticService.Spacefarer)" Partner="department">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="Positions">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.String" Nullable="false"/>
+        <Property Name="title" Type="Edm.String"/>
+        <NavigationProperty Name="members" Type="Collection(GalacticService.Spacefarer)" Partner="position">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+      </EntityType>
+      <Annotations Target="GalacticService.Spacefarer">
+        <Annotation Term="UI.FieldGroup" Qualifier="GeneratedGroup">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="ID"/>
+                  <PropertyValue Property="Value" Path="ID"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="name"/>
+                  <PropertyValue Property="Value" Path="name"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="stardustCollection"/>
+                  <PropertyValue Property="Value" Path="stardustCollection"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="wormholeNavigationSkill"/>
+                  <PropertyValue Property="Value" Path="wormholeNavigationSkill"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="originPlanet"/>
+                  <PropertyValue Property="Value" Path="originPlanet"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="spacesuitColor"/>
+                  <PropertyValue Property="Value" Path="spacesuitColor"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="department_ID"/>
+                  <PropertyValue Property="Value" Path="department_ID"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="position_ID"/>
+                  <PropertyValue Property="Value" Path="position_ID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="ID" String="GeneratedFacet1"/>
+              <PropertyValue Property="Label" String="General Information"/>
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneratedGroup"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Label" String="ID"/>
+              <PropertyValue Property="Value" Path="ID"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Label" String="name"/>
+              <PropertyValue Property="Value" Path="name"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Label" String="stardustCollection"/>
+              <PropertyValue Property="Value" Path="stardustCollection"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Label" String="wormholeNavigationSkill"/>
+              <PropertyValue Property="Value" Path="wormholeNavigationSkill"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Label" String="originPlanet"/>
+              <PropertyValue Property="Value" Path="originPlanet"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>spacesuitColor</PropertyPath>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="GalacticService.Spacefarer/department_ID">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="CollectionPath" String="Departments"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="department_ID"/>
+                  <PropertyValue Property="ValueListProperty" String="ID"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="GalacticService.Spacefarer/position_ID">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="CollectionPath" String="Positions"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="position_ID"/>
+                  <PropertyValue Property="ValueListProperty" String="ID"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="title"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

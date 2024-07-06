@@ -1,0 +1,31 @@
+{
+  "name": "galactic-spacefarers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cds run",
+    "watch-galactic": "cds watch --open galactic/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": "*"
+      }
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sap/cds": "^7.9.3",
+    "sqlite3": "^5.0.0"
+  },
+  "sapux": [
+    "app/galactic"
+  ],
+  "devDependencies": {
+    "@sap/ux-specification": "^1.120.13"
+  }
+}

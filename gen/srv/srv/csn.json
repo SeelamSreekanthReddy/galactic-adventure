@@ -1,0 +1,398 @@
+{
+  "namespace": "sap.galactic.spacefarer",
+  "definitions": {
+    "sap.galactic.spacefarer.Spacefarer": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "type": "cds.String"
+        },
+        "stardustCollection": {
+          "type": "cds.Integer"
+        },
+        "wormholeNavigationSkill": {
+          "type": "cds.Integer"
+        },
+        "originPlanet": {
+          "type": "cds.String"
+        },
+        "spacesuitColor": {
+          "type": "cds.String"
+        },
+        "department": {
+          "type": "cds.Association",
+          "target": "sap.galactic.spacefarer.Departments",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "position": {
+          "type": "cds.Association",
+          "target": "sap.galactic.spacefarer.Positions",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.galactic.spacefarer.Departments": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "type": "cds.String"
+        },
+        "members": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.galactic.spacefarer.Spacefarer",
+          "on": [
+            {
+              "ref": [
+                "members",
+                "department"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.galactic.spacefarer.Positions": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "title": {
+          "type": "cds.String"
+        },
+        "members": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.galactic.spacefarer.Spacefarer",
+          "on": [
+            {
+              "ref": [
+                "members",
+                "position"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "GalacticService": {
+      "@source": "srv/service.cds",
+      "kind": "service"
+    },
+    "GalacticService.Spacefarer": {
+      "kind": "entity",
+      "@UI.FieldGroup#GeneratedGroup.$Type": "UI.FieldGroupType",
+      "@UI.FieldGroup#GeneratedGroup.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Label": "ID",
+          "Value": {
+            "=": "ID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "name",
+          "Value": {
+            "=": "name"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "stardustCollection",
+          "Value": {
+            "=": "stardustCollection"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "wormholeNavigationSkill",
+          "Value": {
+            "=": "wormholeNavigationSkill"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "originPlanet",
+          "Value": {
+            "=": "originPlanet"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "spacesuitColor",
+          "Value": {
+            "=": "spacesuitColor"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "department_ID",
+          "Value": {
+            "=": "department_ID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "position_ID",
+          "Value": {
+            "=": "position_ID"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "ID": "GeneratedFacet1",
+          "Label": "General Information",
+          "Target": "@UI.FieldGroup#GeneratedGroup"
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "$Type": "UI.DataField",
+          "Label": "ID",
+          "Value": {
+            "=": "ID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "name",
+          "Value": {
+            "=": "name"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "stardustCollection",
+          "Value": {
+            "=": "stardustCollection"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "wormholeNavigationSkill",
+          "Value": {
+            "=": "wormholeNavigationSkill"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Label": "originPlanet",
+          "Value": {
+            "=": "originPlanet"
+          }
+        }
+      ],
+      "@UI.SelectionFields": [
+        {
+          "=": "spacesuitColor"
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "sap.galactic.spacefarer.Spacefarer"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "type": "cds.String"
+        },
+        "stardustCollection": {
+          "type": "cds.Integer"
+        },
+        "wormholeNavigationSkill": {
+          "type": "cds.Integer"
+        },
+        "originPlanet": {
+          "type": "cds.String"
+        },
+        "spacesuitColor": {
+          "type": "cds.String"
+        },
+        "department": {
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Departments",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "department_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "name"
+            }
+          ],
+          "type": "cds.Association",
+          "target": "GalacticService.Departments",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "position": {
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Positions",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "position_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "title"
+            }
+          ],
+          "type": "cds.Association",
+          "target": "GalacticService.Positions",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "GalacticService.Departments": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "sap.galactic.spacefarer.Departments"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "type": "cds.String"
+        },
+        "members": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "GalacticService.Spacefarer",
+          "on": [
+            {
+              "ref": [
+                "members",
+                "department"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "GalacticService.Positions": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "sap.galactic.spacefarer.Positions"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "title": {
+          "type": "cds.String"
+        },
+        "members": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "GalacticService.Spacefarer",
+          "on": [
+            {
+              "ref": [
+                "members",
+                "position"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v4.9.4",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}
