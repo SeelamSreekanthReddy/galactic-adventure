@@ -1,4 +1,3 @@
----
 _schema-version: '3.1'
 ID: galactic-spacefarers
 version: 1.0.0
@@ -25,4 +24,32 @@ modules:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
           srv-url: ${default-url}
-    requires: []
+    requires:
+      - name: galactic-spacefarers-auth
+
+  - name: galactic-spacefarers
+    type: approuter.nodejs
+    path: app/router
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: galactic-spacefarers-auth
+
+resources:
+  - name: galactic-spacefarers-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: galactic-spacefarers-${org}-${space}
+        tenant-mode: dedicated
